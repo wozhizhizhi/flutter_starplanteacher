@@ -5,6 +5,7 @@ import 'pages/splash.dart';
 import 'pages/homepage.dart';
 import 'pages/splash.dart';
 import 'pages/login.dart';
+import 'pages/tab_book_page.dart';
 
 void main() => runApp(new MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/HomePage': (BuildContext context) => new HomePage(),
         '/Splash': (BuildContext context) => new Splash(),
         '/Login': (BuildContext context) => new LoginPage(),
+        '/TabBookPage': (BuildContext context) => new TabBookPage(),
       },
       home: new Splash(),
     );

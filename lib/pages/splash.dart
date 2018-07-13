@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Splash extends StatefulWidget {
@@ -45,7 +46,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
                 onPressed: () {
 //                  return RouteUtil.routetoHome(context);
 //                  _logOut();
-                  Navigator.pushReplacementNamed(context , '/Login');
+                  go2HomePage();
 
                 },
               ),
@@ -88,6 +89,20 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   }
 
   void go2HomePage() {
-    Navigator.pushReplacementNamed(context , '/Login');
+    _getTokenShared();
+  }
+
+  // 获取token的本地数据
+  _getTokenShared() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token");
+    print('Pressed $token');
+    // 有token跳转到首页没有跳转登录页面
+    if (token != null && token != ""){
+      Navigator.pushReplacementNamed(context , '/HomePage');
+    }else{
+      Navigator.pushReplacementNamed(context , '/Login');
+    }
+
   }
 }

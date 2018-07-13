@@ -21,10 +21,10 @@ class Fecth {
       receiveTimeout: 5000,
       contentType: ContentType.parse("application/x-www-form-urlencoded"),
     );
+    dio = new Dio(options);
   }
 
   getDio() {
-    dio = new Dio(options);
     return dio;
   }
 

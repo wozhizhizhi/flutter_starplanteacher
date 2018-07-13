@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter_starplanforparents/modle/basemodle.dart';
 import 'package:flutter_starplanforparents/modle/loginvo.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,6 +24,8 @@ class _LoginPageState extends State<LoginPage> {
       new TextEditingController();
   TextEditingController _passWordEditingController =
       new TextEditingController();
+  // 初始化本地SharedPreferences
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   //通过本地获取系统的UUID
   Future<Null> _getUuid() async {
@@ -205,16 +208,19 @@ class _LoginPageState extends State<LoginPage> {
     await _getphoneMark();
     await _getsystemMark();
 
-    print(uuid);
-    print(phoneMark);
-    print(systemMark);
-    print(version);
+    SharedPreferences prefs = await _prefs;
+    await prefs.setString('uuid', uuid);
+    await prefs.setString('phoneMark', phoneMark);
+    await prefs.setString('systemMark', systemMark);
+    await prefs.setInt('version', version);
+
     BaseModel<LoginVo> model = await logintum.getLoginData(
         account, realPassword, 2, uuid, phoneMark, systemMark, version, null);
     print("modle++++${model.data.token}");
     if (model.data != null) {
       String token = model.data.token;
       if (token != null && token != "") {
+        await prefs.setString('token', token);
         Navigator.pushReplacementNamed(context, "/HomePage");
       }
     }

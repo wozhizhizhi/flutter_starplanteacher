@@ -12,7 +12,7 @@ dependencies:
   device_info: "^0.2.1"
   dio: "^0.0.14"
   path_provider: ^0.2.1+1
-
+  shared_preferences: "^0.4.2"
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +47,9 @@ flutter:
    - images/img_login_pwd.png
    - images/img_login_user.png
    - images/login_logo.png
+   - images/rp_thunder.png
+   - images/tk_img_loading_anim.gif
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

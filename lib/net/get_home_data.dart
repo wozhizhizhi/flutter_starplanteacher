@@ -2,16 +2,14 @@ import 'dart:async';
 import 'package:flutter_starplanforparents/modle/basemodle.dart';
 import 'package:flutter_starplanforparents/modle/homevo.dart';
 import 'package:flutter_starplanforparents/net/apis.dart';
-import 'package:flutter_starplanforparents/net/dio_factory.dart';
+import 'package:flutter_starplanforparents/net/fecth.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
 class GetHomeData{
   Future<BaseModel<HomeVo>> getStoryExtra() async {
-  Dio dio =DioFactory.getInstance().getDio();
+  Dio dio =Fecth.getInstance().getDio();
 
   String url = Apis.BASE_URL + Apis.URL_HOMEPAGE;
-
-  print(url);
 
   int code;
 

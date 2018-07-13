@@ -12,8 +12,6 @@ class TabGuidancePage extends StatefulWidget {
 }
 
 class _TabGuidancePageState extends State<TabGuidancePage> {
-  static const platform =
-      const MethodChannel("com.xyjy.flutterstarteacher/androiddevice");
   BaseModel<HomeVo> model;
   GetHomeData getHomeData;
   @override
@@ -21,21 +19,7 @@ class _TabGuidancePageState extends State<TabGuidancePage> {
     // TODO: implement initState
     super.initState();
     getHomeData = new GetHomeData();
-    getData();
-    getTime().then((str) {
-      Scaffold.of(context).showSnackBar(
-          new SnackBar(content: Text(str != null ? str : "获取失败")));
-    });
-  }
-
-  Future<String> getTime() async {
-    var str;
-    try {
-      str = await platform.invokeMethod("getTime");
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-    return str;
+//    getData();
   }
 
   Future<Null> getData() async {
