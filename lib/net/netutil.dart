@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:flutter_starplanforparents/net/fecth.dart';
 import 'package:flutter_starplanforparents/modle/booklistvo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_starplanforparents/modle/homevo.dart';
 
 class NetUtil{
   Future<BaseModel<List<BookListVo>>> getBookListData() async{
@@ -65,6 +66,59 @@ class NetUtil{
     } finally {
       model =
       new BaseModel(statusCode: code, statusMsg: errorMsg, data: bookListVos);
+    }
+    return model;
+  }
+
+  // 获取首页列表的数据
+  Future<BaseModel<List<HomeVo>>> getHomeData() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token");
+    String uniqueId = prefs.getString("uuid");
+    String phoneMark = prefs.getString("phoneMark");
+    String systemMark = prefs.getString("systemMark");
+    int version = prefs.getInt("version");
+    BaseModel<List<HomeVo>> model;
+    List<HomeVo> list;
+    Dio dio = Fecth.getInstance().dio;
+    String url = Apis.BASE_URL_NOPORT + Apis.URL_HOMEPAGE;
+    Response response;
+    int code;
+    String errorMsg;
+
+    try {
+      print(new DateTime.now().millisecondsSinceEpoch);
+
+      response = await dio.get(url, data:{
+        "uniqueId": uniqueId,
+        "phoneMark": phoneMark,
+        "systemMark": systemMark,
+        "platForm": 1,
+        "version": version,
+        "token": token,
+        "time": new DateTime.now().millisecondsSinceEpoch,
+      });
+
+      print("response-+++ $response");
+      code = response.statusCode;
+      if (code == HttpStatus.OK) {
+        print(response.data['statusMsg']);
+        errorMsg = response.data['statusMsg'];
+        code = response.data['statusCode'];
+        List homes = response.data['homeVoArr'];
+        list = homes.map((homeData){
+          return HomeVo.fromJson(homeData);
+        }).toList();
+        print(List);
+      } else {
+        errorMsg = '服务器异常';
+      }
+    } catch (e) {
+      print(e.toString());
+      errorMsg = '您的网络似乎出了什么问题';
+    } finally {
+      model =
+      new BaseModel(statusCode: code, statusMsg: errorMsg, data: list);
     }
     return model;
   }

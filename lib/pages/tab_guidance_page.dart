@@ -5,6 +5,7 @@ import 'package:flutter_starplanforparents/modle/homevo.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_starplanforparents/strings/string.dart';
+import 'package:flutter_starplanforparents/net/netutil.dart';
 
 class TabGuidancePage extends StatefulWidget {
   @override
@@ -12,20 +13,23 @@ class TabGuidancePage extends StatefulWidget {
 }
 
 class _TabGuidancePageState extends State<TabGuidancePage> {
-  BaseModel<HomeVo> model;
-  GetHomeData getHomeData;
+  BaseModel<List<HomeVo>> model;
+  List<HomeVo> list;
+  NetUtil netUtil;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getHomeData = new GetHomeData();
-//    getData();
+    netUtil = new NetUtil();
+    _getData();
   }
 
-  Future<Null> getData() async {
-    var home = await getHomeData.getStoryExtra();
+  Future<Null> _getData() async {
+    if (!mounted) return; //异步处理，防止报错
+    BaseModel<List<HomeVo>> models = await netUtil.getHomeData();
     setState(() {
-      model = home;
+      model = models;
+      print("modle$model");
     });
   }
 
@@ -163,27 +167,39 @@ class _TabGuidancePageState extends State<TabGuidancePage> {
           width: 500.0,
           height: 900.0,
         )),
-        new Column(
-          children: <Widget>[
-            new Column(
-              children: <Widget>[
-                _buidHeader(),
-                new Container(
-                  child: _buildItem(),
-                  padding: const EdgeInsets.all(10.0),
-                ),
-                new Container(
-                  child: _buildItem(),
-                  padding: const EdgeInsets.all(10.0),
-                ),
-                new Container(
-                  child: _buildItem(),
-                  padding: const EdgeInsets.all(10.0),
-                ),
-              ],
-            )
+
+        new CustomScrollView(
+          slivers: <Widget>[
+//            new SliverAppBar(
+//              title: new Expanded(child: _buidHeader()),
+//            ),
+            new SliverFillRemaining(child: _buidHeader(),),
+            new SliverFixedExtentList(delegate: new SliverChildBuilderDelegate((BuildContext context, int index){
+              return _buildItem();
+            }), itemExtent: 3.0)
           ],
-        )
+        ),
+//        new Column(
+//          children: <Widget>[
+//            new Column(
+//              children: <Widget>[
+//                _buidHeader(),
+//                new Container(
+//                  child: _buildItem(),
+//                  padding: const EdgeInsets.all(10.0),
+//                ),
+//                new Container(
+//                  child: _buildItem(),
+//                  padding: const EdgeInsets.all(10.0),
+//                ),
+//                new Container(
+//                  child: _buildItem(),
+//                  padding: const EdgeInsets.all(10.0),
+//                ),
+//              ],
+//            )
+//          ],
+//        )
       ],
     );
   }

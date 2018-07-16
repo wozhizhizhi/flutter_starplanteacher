@@ -6,6 +6,7 @@ class CommonLoading extends StatelessWidget {
     return new Container(
       child: new Center(
         child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Image.asset("images/tk_img_loading_anim.gif"),
             new Container(
