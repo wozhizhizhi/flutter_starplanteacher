@@ -78,7 +78,7 @@ class _TabBookPageState extends State<TabBookPage> {
             ],
           ),
         ),
-        body: new PageView(physics: ScrollPhysics(),
+        body: new PageView(
           controller: pageController,
           onPageChanged: onPageChance,
           children: <Widget>[

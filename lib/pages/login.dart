@@ -147,33 +147,34 @@ class _LoginPageState extends State<LoginPage> {
             height: 70.0,
             padding: const EdgeInsets.only(top: 30.0),
             child: new RaisedButton(
-                onPressed: () {
-                  if (_usetNameEditingController.value.text.toString().trim() !=
-                          "" &&
-                      _passWordEditingController.value.text.toString().trim() !=
-                          "") {
-                    String account = _usetNameEditingController.value.text;
-                    String passWord = _passWordEditingController.value.text;
-                    _getLoginData(account, passWord);
-                  } else {
-                    // 这样写有问题！可以在最外层new Builder
+              onPressed: () {
+                if (_usetNameEditingController.value.text.toString().trim() !=
+                        "" &&
+                    _passWordEditingController.value.text.toString().trim() !=
+                        "") {
+                  String account = _usetNameEditingController.value.text;
+                  String passWord = _passWordEditingController.value.text;
+                  _getLoginData(account, passWord);
+                } else {
+                  // 这样写有问题！可以在最外层new Builder
 //                    Scaffold.of(context).showSnackBar(
 //                          new SnackBar(
 //                            content: new Text("请先输入账号或者密码"),
 //                          ),
 //                        );
-                  }
-                },
-                child: new Text(
-                    "登录",
-                    style: new TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.blue),
-                  ),
-                color: Colors.yellow,
-                shape: new StadiumBorder(),
+                }
+              },
+              child: new Text(
+                "登录",
+                style: new TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.blue,
+                ),
               ),
+              color: Colors.yellow,
+              shape: new StadiumBorder(),
+            ),
           ),
         ),
         new Container(

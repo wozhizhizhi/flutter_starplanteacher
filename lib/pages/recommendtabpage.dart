@@ -13,15 +13,19 @@ class RecommendTabPage extends StatefulWidget {
 
 class _RecommendTabPageState extends State<RecommendTabPage> {
   BaseModel<List<BookListVo>> model = new BaseModel<List<BookListVo>>();
-  NetUtil netUtil;
+  List<BookListVo> bookListvo = new List<BookListVo>();
 
   Future<Null> _getData() async {
     if (!mounted) return; //异步处理，防止报错
-    BaseModel<List<BookListVo>> models = await netUtil.getBookListData();
+    BaseModel<List<BookListVo>> models =
+        await NetUtil.getInstance().getBookListData();
     setState(() {
       model = models;
-      print("modle$model");
     });
+
+    if (model.data.isNotEmpty && model.data != null) {
+      bookListvo = model.data;
+    }
   }
 
   @override
@@ -34,9 +38,6 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (netUtil == null) {
-      netUtil = new NetUtil();
-    }
     _getData();
   }
 
@@ -49,7 +50,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
           new Expanded(
             child: new Card(
               child: new Image.network(
-                model.data[index].coverUrl,
+                bookListvo[index].coverUrl,
                 fit: BoxFit.fill,
               ),
             ),
@@ -57,7 +58,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
           new Container(
             padding: const EdgeInsets.only(top: 5.0),
             child: new Text(
-              model.data[index].name,
+              bookListvo[index].name,
               maxLines: 2,
               style: new TextStyle(fontSize: 12.0),
             ),
@@ -73,7 +74,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
                   height: 15.0,
                 ),
                 new Text(
-                  " x ${model.data[index].difficultyIndex}",
+                  " x ${bookListvo[index].difficultyIndex}",
                   style: new TextStyle(fontSize: 12.0),
                 ),
               ],
@@ -85,8 +86,8 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
         Navigator.of(context).push(
               new MaterialPageRoute(
                 builder: (context) => new BookDetailPage(
-                      ids: model.data[index].id,
-                      url: model.data[index].coverUrl,
+                      ids: bookListvo[index].id,
+                      url: bookListvo[index].coverUrl,
                     ),
               ),
             );
@@ -97,57 +98,56 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
   @override
   Widget build(BuildContext context) {
     var content;
-    print("model.data.length----: ${model.data.length}");
-    content = new CommonLoading();
-    if (model.data.length == 0 || model.data.length == null) {
+    if (bookListvo.isEmpty) {
       content = new CommonLoading();
     } else {
-      content = new GridView.builder(
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 0.58),
-        itemBuilder: (context, index) => _buidItem(index),
-        itemCount: model.data.length,
-        scrollDirection: Axis.vertical,
+//      content = new GridView.builder(
+//        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+//            crossAxisCount: 3,
+//            mainAxisSpacing: 10.0,
+//            crossAxisSpacing: 10.0,
+//            childAspectRatio: 0.58),
+//        itemBuilder: (context, index) => _buidItem(index),
+//        itemCount: model.data.length,
+//        scrollDirection: Axis.vertical,
+//      );
+      content = new Container(
+        child: new CustomScrollView(
+          slivers: <Widget>[
+            new SliverAppBar(
+              backgroundColor: Colors.transparent,
+              title: new Text(
+                "热门图书",
+                style: new TextStyle(
+                  fontSize: 14.0,
+                  color: const Color(0xff484848),
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            new SliverGrid(
+              delegate: new SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return _buidItem(index);
+                },
+                childCount: model.data.length,
+              ),
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                  childAspectRatio: 0.58),
+            )
+          ],
+        ),
+        padding: const EdgeInsets.all(10.0),
       );
     }
 
     //这里没有用到上面的
     return new Scaffold(
       body: new RefreshIndicator(
-        child: new Container(
-          child: new CustomScrollView(
-            slivers: <Widget>[
-              new SliverAppBar(
-                backgroundColor: Colors.transparent,
-                title: new Text(
-                  "热门图书",
-                  style: new TextStyle(
-                    fontSize: 14.0,
-                    color: const Color(0xff484848),
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              new SliverGrid(
-                delegate: new SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return _buidItem(index);
-                  },
-                  childCount: model.data.length,
-                ),
-                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 10.0,
-                    childAspectRatio: 0.58),
-              )
-            ],
-          ),
-          padding: const EdgeInsets.all(10.0),
-        ),
+        child: content,
         onRefresh: _getData,
       ),
     );

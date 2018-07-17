@@ -8,7 +8,7 @@ class TabMyPage extends StatefulWidget {
 class _TabMyPageState extends State<TabMyPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: new DecoratedBox(
+    return Scaffold(appBar:new AppBar(),body: new DecoratedBox(
       decoration: new BoxDecoration(
         gradient: new RadialGradient(
           center: const Alignment(-0.5, -0.6),

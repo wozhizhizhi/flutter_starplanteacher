@@ -1,6 +1,6 @@
 class HomeVo {
   int listType; // 列表类型
-  List<HomeListVo> listVoArr; // 首页列表
+  List listVoArr; // 首页列表
 
   HomeVo({this.listType , this.listVoArr});
 

@@ -3,14 +3,20 @@ import 'dart:async';
 import 'package:flutter_starplanforparents/modle/basemodle.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
 import 'package:flutter_starplanforparents/net/fecth.dart';
 import 'package:flutter_starplanforparents/modle/booklistvo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_starplanforparents/modle/homevo.dart';
 
 class NetUtil{
+  static NetUtil _instance;
+  static NetUtil getInstance(){
+    if (_instance == null){
+      _instance = new NetUtil();
+    }
+    return _instance;
+  }
+  NetUtil(){}
   Future<BaseModel<List<BookListVo>>> getBookListData() async{
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -80,6 +86,7 @@ class NetUtil{
     int version = prefs.getInt("version");
     BaseModel<List<HomeVo>> model;
     List<HomeVo> list;
+    List<HomeListVo> homelistvo;
     Dio dio = Fecth.getInstance().dio;
     String url = Apis.BASE_URL_NOPORT + Apis.URL_HOMEPAGE;
     Response response;
@@ -105,9 +112,9 @@ class NetUtil{
         print(response.data['statusMsg']);
         errorMsg = response.data['statusMsg'];
         code = response.data['statusCode'];
-        List homes = response.data['homeVoArr'];
-        list = homes.map((homeData){
-          return HomeVo.fromJson(homeData);
+        List homevoList = response.data['homeVoArr'];
+        list = homevoList.map((homevoList){
+          return HomeVo.fromJson(homevoList);
         }).toList();
         print(List);
       } else {
@@ -117,8 +124,7 @@ class NetUtil{
       print(e.toString());
       errorMsg = '您的网络似乎出了什么问题';
     } finally {
-      model =
-      new BaseModel(statusCode: code, statusMsg: errorMsg, data: list);
+      model = new BaseModel(statusCode: code, statusMsg: errorMsg, data: list);
     }
     return model;
   }

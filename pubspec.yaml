@@ -13,6 +13,7 @@ dependencies:
   dio: "^0.0.14"
   path_provider: ^0.2.1+1
   shared_preferences: "^0.4.2"
+  sliver_fab: "^0.1.0"
 
 dev_dependencies:
   flutter_test:
