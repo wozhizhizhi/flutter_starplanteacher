@@ -50,7 +50,14 @@ flutter:
    - images/login_logo.png
    - images/rp_thunder.png
    - images/tk_img_loading_anim.gif
-
+   - images/icon_adress.png
+   - images/me_icon_arrowgary.png
+   - images/read_ask_tag.png
+   - images/highlight_icon.png
+   - images/highlight_icon.png
+   - images/icon_comment_m.png
+   - images/icon_like_s.png
+   - images/icon_reply_s.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

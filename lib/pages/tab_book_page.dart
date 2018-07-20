@@ -78,7 +78,8 @@ class _TabBookPageState extends State<TabBookPage> {
             ],
           ),
         ),
-        body: new PageView(
+        body: new PageView(key: new PageStorageKey(_curIndex),
+//          physics: const PageScrollPhysics(parent: const NeverScrollableScrollPhysics()),
           controller: pageController,
           onPageChanged: onPageChance,
           children: <Widget>[
