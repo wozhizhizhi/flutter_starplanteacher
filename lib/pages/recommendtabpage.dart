@@ -43,7 +43,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
 
   // 构建列表的子项
   Widget _buidItem(int index) {
-    return new GestureDetector(
+    return new Hero(tag: bookListvo[index].coverUrl, child: GestureDetector(
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -92,7 +92,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
               ),
             );
       },
-    );
+    ),);
   }
 
   @override

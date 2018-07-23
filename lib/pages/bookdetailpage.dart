@@ -53,12 +53,17 @@ class _BookDetailPageState extends State<BookDetailPage> {
       body: new Builder(
         builder: (context) => new SliverFab(
               slivers: <Widget>[
-                new SliverAppBar(
+                new SliverAppBar(leading: new GestureDetector(child: new Icon(Icons.arrow_back_ios),onTap: (){
+                  Navigator.of(context).pop();
+                },),
                   backgroundColor: const Color(0xff22b2e1),
                   expandedHeight: 256.0,
                   pinned: true,
                   flexibleSpace: new FlexibleSpaceBar(
-                    title: new Text("标题"),
+                    title: new Text(
+                      "标题",
+                      style: new TextStyle(fontSize: 16.0),
+                    ),
                     centerTitle: true,
                     background: Container(
                       child: new Stack(
@@ -79,6 +84,30 @@ class _BookDetailPageState extends State<BookDetailPage> {
                             filter:
                                 ui.ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
                           ),
+                          new Container(
+                            margin: const EdgeInsets.only(
+                                top: 60.0, left: 20.0, right: 20.0,bottom: 10.0),
+                            child: new Row(
+                              children: <Widget>[
+                                new Card(
+                                  child: new Image.network(
+                                    widget.url,
+                                    fit: BoxFit.fill,
+                                    width: 105.0,
+                                    height: 145.0,
+                                  ),
+                                ),
+                                new Expanded(
+                                  child: Container(alignment: Alignment.topRight,padding: const EdgeInsets.only(top: 32.0,left: 10.0),
+                                    child: new Text(
+                                      "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                       width: 256.0,
@@ -538,7 +567,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       style: new TextStyle(
                           color: Color(0xffb5b5b5), fontSize: 11.0),
                     ),
-                    new Container(padding: const EdgeInsets.only(right: 15.0,left: 25.0,),
+                    new Container(
+                      padding: const EdgeInsets.only(
+                        right: 15.0,
+                        left: 25.0,
+                      ),
                       child: new Row(
                         children: <Widget>[
                           new Image.asset(

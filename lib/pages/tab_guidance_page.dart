@@ -84,7 +84,7 @@ class _TabGuidancePageState extends State<TabGuidancePage> {
               new Container(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: new Text(
-                  " 班级主题阅读活动",
+                  "班级主题阅读活动",
                   style: new TextStyle(
                     color: Colors.blue,
                     fontSize: 18.0,
