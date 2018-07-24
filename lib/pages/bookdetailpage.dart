@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 import 'dart:ui' as ui;
 import 'package:flutter_starplanforparents/widget/StarRating.dart';
+import 'package:flutter_starplanforparents/util/PhotoHero.dart';
 
 class BookDetailPage extends StatefulWidget {
   int ids = 0;
@@ -53,9 +54,13 @@ class _BookDetailPageState extends State<BookDetailPage> {
       body: new Builder(
         builder: (context) => new SliverFab(
               slivers: <Widget>[
-                new SliverAppBar(leading: new GestureDetector(child: new Icon(Icons.arrow_back_ios),onTap: (){
-                  Navigator.of(context).pop();
-                },),
+                new SliverAppBar(
+                  leading: new GestureDetector(
+                    child: new Icon(Icons.arrow_back_ios),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
                   backgroundColor: const Color(0xff22b2e1),
                   expandedHeight: 256.0,
                   pinned: true,
@@ -86,19 +91,40 @@ class _BookDetailPageState extends State<BookDetailPage> {
                           ),
                           new Container(
                             margin: const EdgeInsets.only(
-                                top: 60.0, left: 20.0, right: 20.0,bottom: 10.0),
+                                top: 60.0,
+                                left: 20.0,
+                                right: 20.0,
+                                bottom: 10.0),
                             child: new Row(
                               children: <Widget>[
-                                new Card(
-                                  child: new Image.network(
-                                    widget.url,
-                                    fit: BoxFit.fill,
+                                new BackdropFilter(
+                                  child: Opacity(
+                                    opacity: 0.35,
+                                    child: new Container(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  filter: ui.ImageFilter.blur(
+                                      sigmaX: 50.0, sigmaY: 50.0),
+                                ),
+                                new Container(
+                                  child: new PhotoHero(
+                                    photo: widget.url,
                                     width: 105.0,
                                     height: 145.0,
                                   ),
+//                                  new Image.network(
+//                                    widget.url,
+//                                    fit: BoxFit.fill,
+//                                    width: 105.0,
+//                                    height: 145.0,
+//                                  ),
                                 ),
                                 new Expanded(
-                                  child: Container(alignment: Alignment.topRight,padding: const EdgeInsets.only(top: 32.0,left: 10.0),
+                                  child: Container(
+                                    alignment: Alignment.topRight,
+                                    padding: const EdgeInsets.only(
+                                        top: 32.0, left: 10.0),
                                     child: new Text(
                                       "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
                                       softWrap: true,

@@ -5,6 +5,7 @@ import 'package:flutter_starplanforparents/modle/booklistvo.dart';
 import 'package:flutter_starplanforparents/modle/basemodle.dart';
 import 'package:flutter_starplanforparents/widget/commonloading.dart';
 import 'package:flutter_starplanforparents/pages/bookdetailpage.dart';
+import 'package:flutter_starplanforparents/util/PhotoHero.dart';
 
 class RecommendTabPage extends StatefulWidget {
   @override
@@ -43,56 +44,56 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
 
   // 构建列表的子项
   Widget _buidItem(int index) {
-    return new Hero(tag: bookListvo[index].coverUrl, child: GestureDetector(
-      child: new Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new Expanded(
-            child: new Card(
-              child: new Image.network(
-                bookListvo[index].coverUrl,
-                fit: BoxFit.fill,
+    return new Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        new Expanded(
+          child: new Card(
+            child: new PhotoHero(
+              photo: bookListvo[index].coverUrl,
+              onTap: () {
+                Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (BuildContext context) {
+                    return new BookDetailPage(
+                        ids: bookListvo[index].id,
+                        url: bookListvo[index].coverUrl);
+                  }),
+                );
+//                  new Image.network(
+//                    bookListvo[index].coverUrl,
+//                    fit: BoxFit.fill,
+//                  );
+              },
+            ),
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.only(top: 5.0),
+          child: new Text(
+            bookListvo[index].name,
+            maxLines: 2,
+            style: new TextStyle(fontSize: 12.0),
+          ),
+        ),
+        new Container(
+          padding: const EdgeInsets.only(top: 5.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Image.asset(
+                "images/rp_thunder.png",
+                width: 15.0,
+                height: 15.0,
               ),
-            ),
-          ),
-          new Container(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: new Text(
-              bookListvo[index].name,
-              maxLines: 2,
-              style: new TextStyle(fontSize: 12.0),
-            ),
-          ),
-          new Container(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Image.asset(
-                  "images/rp_thunder.png",
-                  width: 15.0,
-                  height: 15.0,
-                ),
-                new Text(
-                  " x ${bookListvo[index].difficultyIndex}",
-                  style: new TextStyle(fontSize: 12.0),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      onTap: () {
-        Navigator.of(context).push(
-              new MaterialPageRoute(
-                builder: (context) => new BookDetailPage(
-                      ids: bookListvo[index].id,
-                      url: bookListvo[index].coverUrl,
-                    ),
+              new Text(
+                " x ${bookListvo[index].difficultyIndex}",
+                style: new TextStyle(fontSize: 12.0),
               ),
-            );
-      },
-    ),);
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override

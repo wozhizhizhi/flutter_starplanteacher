@@ -58,6 +58,17 @@ flutter:
    - images/icon_comment_m.png
    - images/icon_like_s.png
    - images/icon_reply_s.png
+   - images/me_img_bg.png
+   - images/img_info_setting.png
+   - images/defaul_head_parent.png
+   - images/img_userinfo_camera.png
+   - images/me_icon_barcode2.png
+   - images/me_icon_borrow2.png
+   - images/me_icon_class.png
+   - images/img_userinfo_jump.png
+   - images/collect.png
+   - images/comments.png
+   - images/message.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
