@@ -55,8 +55,18 @@ class _BookDetailPageState extends State<BookDetailPage> {
         builder: (context) => new SliverFab(
               slivers: <Widget>[
                 new SliverAppBar(
+                  centerTitle: true,
+                  title: new Text(
+                    "标题",
+                    style: new TextStyle(fontSize: 16.0),
+                  ),
                   leading: new GestureDetector(
-                    child: new Icon(Icons.arrow_back_ios),
+                    child: new Container(padding: const EdgeInsets.only(left: 10.0),child: new Image.asset(
+                      "images/btn_back_yellow.png",
+                      width: 15.0,
+                      height: 15.0,
+                      fit: BoxFit.scaleDown,
+                    ),),
                     onTap: () {
                       Navigator.of(context).pop();
                     },
@@ -65,20 +75,21 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   expandedHeight: 256.0,
                   pinned: true,
                   flexibleSpace: new FlexibleSpaceBar(
-                    title: new Text(
-                      "标题",
-                      style: new TextStyle(fontSize: 16.0),
-                    ),
-                    centerTitle: true,
+//                    title: new Text(
+//                      "标题",
+//                      style: new TextStyle(fontSize: 16.0),
+//                    ),
+//                    centerTitle: true,
                     background: Container(
                       child: new Stack(
                         children: <Widget>[
                           new Container(
-                              child: new Image.network(
-                            widget.url,
-                            fit: BoxFit.fill,
-                            width: 720.0,
-                          )),
+                            child: new Image.network(
+                              widget.url,
+                              fit: BoxFit.fill,
+                              width: 720.0,
+                            ),
+                          ),
                           new BackdropFilter(
                             child: Opacity(
                               opacity: 0.35,

@@ -5,6 +5,7 @@ import 'package:flutter_starplanforparents/modle/basemodle.dart';
 import 'package:flutter_starplanforparents/modle/loginvo.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_starplanforparents/pages/registeredpage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -100,29 +101,59 @@ class _LoginPageState extends State<LoginPage> {
           margin: const EdgeInsets.only(top: 18.0),
           child: new Column(
             children: <Widget>[
-              new Container(
-                child: new TextField(
-                  controller: _usetNameEditingController,
-                  decoration: new InputDecoration.collapsed(
-                    hintText: "请输入手机号码",
-                    hintStyle: new TextStyle(fontSize: 15.0),
+              new Row(
+                children: <Widget>[
+                  new Container(
+                    child: new Image.asset(
+                      "images/img_login_user.png",
+                      width: 25.0,
+                      height: 25.0,
+                    ),
+                    padding: const EdgeInsets.only(left: 10.0),
                   ),
-                ),
-                padding: const EdgeInsets.all(15.0),
+                  new Flexible(
+                    child: new Container(
+                      child: new TextField(
+                        keyboardType: TextInputType.phone,
+                        controller: _usetNameEditingController,
+                        decoration: new InputDecoration.collapsed(
+                          hintText: "请输入手机号码",
+                          hintStyle: new TextStyle(fontSize: 15.0),
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                    ),
+                  ),
+                ],
               ),
               new Padding(
                 child: new Divider(),
                 padding: const EdgeInsets.only(right: 10.0, left: 10.0),
               ),
-              new Container(
-                child: new TextField(
-                  controller: _passWordEditingController,
-                  decoration: new InputDecoration.collapsed(
-                    hintText: "请输入密码",
-                    hintStyle: new TextStyle(fontSize: 15.0),
+              new Row(
+                children: <Widget>[
+                  new Container(
+                    child: new Image.asset(
+                      "images/img_login_pwd.png",
+                      width: 25.0,
+                      height: 25.0,
+                    ),
+                    padding: const EdgeInsets.only(left: 10.0),
                   ),
-                ),
-                padding: const EdgeInsets.all(15.0),
+                  new Flexible(
+                    child: new Container(
+                      child: new TextField(
+                        keyboardType: TextInputType.numberWithOptions(signed: true,decimal: true),
+                        controller: _passWordEditingController,
+                        decoration: new InputDecoration.collapsed(
+                          hintText: "请输入密码",
+                          hintStyle: new TextStyle(fontSize: 15.0),
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -133,14 +164,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
               color: Colors.white),
         ),
-        new Container(
+        new GestureDetector(child: new Container(
           child: new Text(
             "忘记密码",
             style: new TextStyle(color: Colors.white),
           ),
           alignment: Alignment.bottomRight,
           padding: const EdgeInsets.only(right: 35.0, top: 10.0),
-        ),
+        ),onTap: (){
+          return Navigator.push(context, new MaterialPageRoute(builder: (context){
+               return new RegisteredPage();
+          }));
+        },),
         new FittedBox(
           child: new Container(
             width: 250.0,

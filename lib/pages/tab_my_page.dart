@@ -117,7 +117,6 @@ class _TabMyPageState extends State<TabMyPage> {
       margin: const EdgeInsets.only(top: 10.0),
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -180,8 +179,8 @@ class _TabMyPageState extends State<TabMyPage> {
     return new Container(
       height: 56.0,
       color: Colors.white,
-      child: new Row(
-        children: <Widget>[new ListTile(),
+      child: new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
           new Container(padding: const EdgeInsets.only(left: 17.0),
             child: new Image.asset(
               url,
@@ -190,7 +189,7 @@ class _TabMyPageState extends State<TabMyPage> {
             ),
 
           ),
-          new Container(padding: const EdgeInsets.only(left: 10.0),
+          new Container(padding: const EdgeInsets.only(right: 220.0),
             child: new Text(
               title,
               style: new TextStyle(
@@ -199,11 +198,12 @@ class _TabMyPageState extends State<TabMyPage> {
               ),
             ),
           ),
-          new Container(
+          new Container(padding: const EdgeInsets.only(right: 17.0),
             child: new Image.asset(
               "images/img_userinfo_jump.png",
               width: 7.0,
               height: 14.0,
+              alignment: Alignment.centerRight,
             ),
           ),
         ],

@@ -26,14 +26,13 @@ class getLogin {
     BaseModel<LoginVo> model;
     LoginVo loginVo;
     String url = Apis.BASE_URL + Apis.URL_LOGIN;
-
     try {
       print(url);
       print(systemMark);
       print(account);
       print(phoneMark);
 //      806933fb23210ac6bbf1892097a100c8
-      print(md5.convert(UTF8.encode(realPassword)));
+      print(md5.convert(utf8.encode(realPassword)));
       response = await dio.post(url, data: {
         "account": account,
         "password": "806933fb23210ac6bbf1892097a100c8",
