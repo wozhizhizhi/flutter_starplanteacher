@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   var tabTitle = ["指导", "图书", "悦读圈", "我"];
   // 选中与未选中的文字效果
   final textTabStyleNormal = new TextStyle(color: const Color(0xffc7c7c7));
@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   int _curIndex = 0;
   var tabImages;
   int lastClickTime = 0;
+  final _key = new GlobalKey<ScaffoldState>();
 
   // 双击退出应用
   Future<bool> _doExitApp() {
@@ -31,6 +32,34 @@ class _HomePageState extends State<HomePage> {
       return new Future.value(false);
     }
   }
+
+  _showDialog() {
+    return showDialog<Null>(
+        context: context,
+        builder: (context) {
+          return new AlertDialog(
+            content: new Text("您要退出应用吗?"),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: new Text('取消')),
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                     Navigator.popUntil(context, ModalRoute.withName('/Login'));
+                  },
+                  child: new Text('确定')),
+            ],
+          );
+        });
+  }
+
+  Future<bool> _requestPop() {
+    _showDialog();
+    return new Future.value(false);
+  }
+
+
 
   void _initPage() {
     _body = new IndexedStack(

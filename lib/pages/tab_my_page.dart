@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_starplanforparents/pages/Setting.dart';
 
 class TabMyPage extends StatefulWidget {
   @override
@@ -18,15 +19,38 @@ class _TabMyPageState extends State<TabMyPage> {
             padding: const EdgeInsets.only(top: 10.0),
             child: _buildBottom("images/collect.png", "收藏"),
           ),
-          new Divider(height: 0.5,color: new Color(0xffc7c7c7),),
+          new Divider(height: 0.5),
           _buildBottom("images/comments.png", "评论回复"),
-          new Divider(height: 0.5,color: new Color(0xffc7c7c7),),
+          new Divider(height: 0.5),
           _buildBottom("images/message.png", "班级管理"),
+//          new Expanded(child: _buildBottom("images/message.png", "退出",onTap: (){
+//            return _showDialog();
+//          }),),
         ],
       ),
     ));
   }
 
+  void _showDialog()
+  {
+    showDialog(context: context,builder: (BuildContext context){
+      return new AlertDialog(
+        content: new Text("您要退出应用吗?"),
+        actions: <Widget>[
+          new FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: new Text('取消')),
+          new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context,"/Login");
+
+              },
+              child: new Text('确定')),
+        ],
+      );
+    });
+  }
   // 头部
   Widget _buildHead() {
     return new Stack(
@@ -38,11 +62,15 @@ class _TabMyPageState extends State<TabMyPage> {
           fit: BoxFit.fill,
         ),
         new Container(
-          child: new Image.asset(
+          child: new GestureDetector(child: new Image.asset(
             "images/img_info_setting.png",
             width: 25.0,
             height: 25.0,
-          ),
+          ),onTap: (){
+            return Navigator.push(context, new MaterialPageRoute(builder: (context){
+                    return new SettingPage();
+            }));
+          },),
           alignment: Alignment.topRight,
           margin: const EdgeInsets.only(top: 35.0, right: 15.0),
         ),
@@ -175,8 +203,8 @@ class _TabMyPageState extends State<TabMyPage> {
   }
 
   // bottom
-  Widget _buildBottom(String url, String title) {
-    return new Container(
+  Widget _buildBottom(String url, String title,{onTap}) {
+    return new GestureDetector(child: Container(
       height: 56.0,
       color: Colors.white,
       child: new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,6 +236,6 @@ class _TabMyPageState extends State<TabMyPage> {
           ),
         ],
       ),
-    );
+    ),onTap: onTap,);
   }
 }

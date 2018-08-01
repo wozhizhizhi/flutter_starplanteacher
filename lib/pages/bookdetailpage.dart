@@ -57,16 +57,19 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 new SliverAppBar(
                   centerTitle: true,
                   title: new Text(
-                    "标题",
+                    "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
                     style: new TextStyle(fontSize: 16.0),
                   ),
                   leading: new GestureDetector(
-                    child: new Container(padding: const EdgeInsets.only(left: 10.0),child: new Image.asset(
-                      "images/btn_back_yellow.png",
-                      width: 15.0,
-                      height: 15.0,
-                      fit: BoxFit.scaleDown,
-                    ),),
+                    child: new Container(
+                      padding: const EdgeInsets.only(
+                          left: 12.0, right: 12.0, top: 12.0, bottom: 12.0),
+                      child: new Image.asset(
+                        "images/btn_back_yellow.png",
+                        width: 5.0,
+                        height: 5.0,
+                      ),
+                    ),
                     onTap: () {
                       Navigator.of(context).pop();
                     },
@@ -115,8 +118,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  filter: ui.ImageFilter.blur(
-                                      sigmaX: 50.0, sigmaY: 50.0),
+                                  filter: ui.ImageFilter
+                                      .blur(sigmaX: 50.0, sigmaY: 50.0),
                                 ),
                                 new Container(
                                   child: new PhotoHero(
@@ -132,16 +135,127 @@ class _BookDetailPageState extends State<BookDetailPage> {
 //                                  ),
                                 ),
                                 new Expanded(
-                                  child: Container(
+                                  child: new Container(
                                     alignment: Alignment.topRight,
                                     padding: const EdgeInsets.only(
                                         top: 32.0, left: 10.0),
-                                    child: new Text(
-                                      "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
-                                      softWrap: true,
+                                    child: new Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        new Text(
+                                          "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
+                                          style: new TextStyle(
+                                              fontSize: 16.0,
+                                              color: Colors.white),
+                                          softWrap: true,
+                                        ),
+                                        new Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 16.0),
+                                          child: new Text(
+                                            "作者：大卫·夏农",
+                                            style: new TextStyle(
+                                                fontSize: 12.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        new Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: new Text(
+                                            " 23人读过",
+                                            style: new TextStyle(
+                                                fontSize: 12.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        new Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: new Row(
+                                            children: <Widget>[
+                                              new Text(
+                                                "难度指数：",
+                                                style: new TextStyle(
+                                                    fontSize: 12.0,
+                                                    color: Colors.white),
+                                              ),
+                                              new Image.asset(
+                                                "images/rp_thunder.png",
+                                                width: 15.0,
+                                                height: 15.0,
+                                              ),
+                                              new Text(
+                                                " x 3",
+                                                style: new TextStyle(
+                                                    fontSize: 12.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        new Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: new Row(
+                                            children: <Widget>[
+                                              new RaisedButton(
+                                                onPressed: null,
+                                                child: new Text(
+                                                  "习题",
+                                                  style: new TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.0),
+                                                ),
+                                                disabledColor:
+                                                    new Color(0xff76DEFC),
+                                                shape:
+                                                    new RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            new BorderRadius
+                                                                    .circular(
+                                                                17.0)),
+                                              ),
+                                              new Container(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12.0),
+                                                child: new RaisedButton(
+                                                  onPressed: null,
+                                                  child: new Text(
+                                                    "视频",
+                                                    style: new TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 15.0),
+                                                  ),
+                                                  disabledColor:
+                                                      new Color(0xffF4C925),
+                                                  shape:
+                                                      new RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              new BorderRadius
+                                                                      .circular(
+                                                                  17.0)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
+//                                new Expanded(
+//                                  child: Container(
+//                                    alignment: Alignment.topRight,
+//                                    padding: const EdgeInsets.only(
+//                                        top: 32.0, left: 10.0),
+//                                    child: new Text(
+//                                      "鸭子学车记鸭子学车记凯迪克大奖得主代表作…",
+//                                      softWrap: true,
+//                                    ),
+//                                  ),
+//                                ),
                               ],
                             ),
                           )

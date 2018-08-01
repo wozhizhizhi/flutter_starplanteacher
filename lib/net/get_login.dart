@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter_starplanforparents/net/fecth.dart';
+import 'package:flutter_starplanforparents/strings/string.dart';
 
 class getLogin {
   Future<BaseModel<LoginVo>> getLoginData(
@@ -32,10 +33,10 @@ class getLogin {
       print(account);
       print(phoneMark);
 //      806933fb23210ac6bbf1892097a100c8
-      print(md5.convert(utf8.encode(realPassword)));
+      print(md5.convert(utf8.encode(realPassword+Strings.MD5_T_MARK)));
       response = await dio.post(url, data: {
         "account": account,
-        "password": "806933fb23210ac6bbf1892097a100c8",
+        "password": md5.convert(utf8.encode(realPassword+Strings.MD5_T_MARK)),
         "loginType": loginType,
         "realPassword": realPassword,
         "uniqueId": uniqueId,

@@ -52,24 +52,24 @@ class RouteUtil {
   }
 
   // 跳转到图书
-  static routetoBook(BuildContext context) {
-    Navigator.of(context).push(
-      new PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (BuildContext context, _, __) {
-            return new TabBookPage();
-          },
-          transitionsBuilder:
-              (_, Animation<double> animation, __, Widget child) {
-            return new FadeTransition(
-              opacity: animation,
-              child: new FadeTransition(
-                child: child,
-                opacity: new Tween<double>(begin: 0.5, end: 1.0)
-                    .animate(animation),
-              ),
-            );
-          }),
-    );
-  }
+ static routetoBook(BuildContext context) {
+  Navigator.of(context).push(
+    new PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return new TabBookPage();
+        },
+        transitionsBuilder:
+            (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: new FadeTransition(
+              child: child,
+              opacity: new Tween<double>(begin: 0.5, end: 1.0)
+                  .animate(animation),
+            ),
+          );
+        }),
+  );
+}
 }

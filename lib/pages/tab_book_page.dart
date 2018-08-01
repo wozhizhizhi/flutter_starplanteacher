@@ -102,7 +102,7 @@ class _TabBookPageState extends State<TabBookPage> {
 //          ),
         ),
         body: new PageView(
-          key: new PageStorageKey<String>(tabTile[_curIndex]),
+//          key: new PageStorageKey<String>(tabTile[_curIndex]),
 //          physics: const PageScrollPhysics(parent: const NeverScrollableScrollPhysics()),
           controller: pageController,
           onPageChanged: (index) {
@@ -133,11 +133,12 @@ class _TabBookPageState extends State<TabBookPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           new Expanded(
-            child: new GestureDetector(onTap: (){
-              setState(() {
-                _curIndex = 0;
-              });
-            },
+            child: new GestureDetector(
+//                onTap: (){
+//              setState(() {
+//                _curIndex = 0;
+//              });
+//            },
               child: Container(
                 alignment: Alignment.center,
                 child: new Text(
@@ -160,11 +161,12 @@ class _TabBookPageState extends State<TabBookPage> {
             ),
           ),
           new Expanded(
-            child: new GestureDetector(onTap: (){
-              setState(() {
-                _curIndex = 1;
-              });
-            },
+            child: new GestureDetector(
+//                onTap: (){
+//              setState(() {
+//                _curIndex = 1;
+//              });
+//            },
               child: Container(
                 alignment: Alignment.center,
                 child: new Text(

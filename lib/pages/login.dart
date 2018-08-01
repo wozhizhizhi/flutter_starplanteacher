@@ -6,6 +6,7 @@ import 'package:flutter_starplanforparents/modle/loginvo.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_starplanforparents/pages/registeredpage.dart';
+import 'package:flutter_plugin/flutter_plugin.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -46,7 +47,9 @@ class _LoginPageState extends State<LoginPage> {
   Future<Null> _getVersion() async {
     int vs;
     try {
-      vs = await platformMethodChannel.invokeMethod("getVersion");
+//      vs = await platformMethodChannel.invokeMethod("getVersion");
+//        vs = await FlutterPlugin.getVersion;
+      vs = await FlutterPlugin.getVersion;
     } on PlatformException catch (e) {
       print(e.message);
     }
@@ -60,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<Null> _getsystemMark() async {
     String vs;
     try {
-      vs = await platformMethodChannel.invokeMethod("getsystemMark");
+      vs = await FlutterPlugin.getsystemMark;
     } on PlatformException catch (e) {
       print(e.message);
     }
@@ -74,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<Null> _getphoneMark() async {
     String vs;
     try {
-      vs = await platformMethodChannel.invokeMethod("getphoneMark");
+      vs = await FlutterPlugin.getphoneMark;
     } on PlatformException catch (e) {
       print(e.message);
     }

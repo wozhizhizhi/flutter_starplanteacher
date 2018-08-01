@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter_starplanforparents/strings/string.dart';
 import 'package:flutter_starplanforparents/net/netutil.dart';
 import 'package:flutter_starplanforparents/widget/commonloading.dart';
+import 'package:flutter_starplanforparents/pages/Homework.dart';
 
 class TabGuidancePage extends StatefulWidget {
   @override
@@ -149,8 +150,12 @@ class _TabGuidancePageState extends State<TabGuidancePage> {
         new Container(
           padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
           child: new RaisedButton(
-            onPressed: null,
-            disabledColor: Colors.white30,
+            onPressed: (){
+              return Navigator.of(context).push(new MaterialPageRoute(builder: (context){
+                      return new HomeWorkPage();
+              }));
+            },
+            color: Colors.white30,
             shape: new StadiumBorder(),
             child: new FittedBox(
               child: new Row(
