@@ -120,10 +120,10 @@ class _SettingPageState extends State<SettingPage> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(25.0)),
                 onPressed: (){
-                  return Navigator.popAndPushNamed(context, '/Login');
-//                  setState(() {
-//                      return _showDialog();
-//                  });
+//                  return Navigator.popAndPushNamed(context, '/Login');
+                  setState(() {
+                      return _showDialog();
+                  });
                 },
                 child: new Text(
                   "退出登录",
@@ -152,6 +152,7 @@ class _SettingPageState extends State<SettingPage> {
               new FlatButton(
                   onPressed: () {
                     prefs.clear();
+                    Navigator.pop(context);
                     Navigator.pop(context);
                     Navigator.popAndPushNamed(context, '/Login');
 

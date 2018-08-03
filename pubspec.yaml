@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_webview_plugin: ^0.1.6
   device_info: "^0.2.1"
-  dio: "^0.0.14"
+  dio: ^0.0.14
   path_provider: ^0.2.1+1
   shared_preferences: "^0.4.2"
   sliver_fab: "^0.1.0"

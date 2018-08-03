@@ -226,6 +226,7 @@ class _TabMyPageState extends State<TabMyPage> {
               ),
             ),
           ),
+
           new Container(padding: const EdgeInsets.only(right: 17.0),
             child: new Image.asset(
               "images/img_userinfo_jump.png",

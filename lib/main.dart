@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: '悦读',
       theme: defaultTargetPlatform==TargetPlatform.android?androidTheme:iosTheme,
       routes: <String , WidgetBuilder>{
         '/HomePage': (BuildContext context) => new HomePage(),
