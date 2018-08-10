@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class RegisteredPage extends StatefulWidget {
   @override
@@ -6,6 +7,61 @@ class RegisteredPage extends StatefulWidget {
 }
 
 class _RegisteredPageState extends State<RegisteredPage> {
+  int countTime = 10;
+  String count = "获取验证码";
+  Timer timer;
+
+  startTime(){
+    timer = new Timer(const Duration(milliseconds: 1000), (){
+      if (countTime-- == 0){
+        timer.cancel();
+      }else{
+        countTime--;
+      }
+
+      setState(() {
+        if (countTime-- == 0){
+          timer.cancel();
+          count = "获取验证码";
+        }
+        else{
+          count = "${countTime--}s";
+        }
+      });
+
+    });
+//    new Future((){
+////      timer = new Timer.periodic(const Duration(milliseconds: 1000), (Void){
+////        --countTime;
+////        setState(() {
+////          if (countTime == 0) {
+////            timer.cancel();
+////            return count = "获取验证码";
+////          }
+////          else{
+////            return count = "${--countTime}s";
+////          }
+////        });
+////      });
+//    timer = new Timer(const Duration(milliseconds: 1000), (){
+//      countTime = countTime -1;
+//      if (countTime == 0){
+//        timer.cancel();
+//        return;
+//      }
+//      setState(() {
+//        if (countTime == 0){
+//
+//          return count = "获取验证码";
+//        }
+//        else{
+//          return count = "${--countTime}s";
+//        }
+//      });
+//
+//    });
+//    });
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -145,8 +201,8 @@ class _RegisteredPageState extends State<RegisteredPage> {
         new Container(
           padding: const EdgeInsets.only(top: 15.0, left: 15.0),
           child: new RaisedButton(
-            onPressed: null,
-            child: new Text("获取验证码"),
+            onPressed: startTime(),
+            child: new Text(count),
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.all(new Radius.circular(15.0)),
             ),

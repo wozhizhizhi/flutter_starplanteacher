@@ -74,6 +74,10 @@ flutter:
    - images/message.png
    - images/quan_icon_post.png
    - images/btn_back_yellow.png
+   - images/app_guide_1.png
+   - images/app_guide_2.png
+   - images/app_guide_3.png
+   - images/cc_book_no.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

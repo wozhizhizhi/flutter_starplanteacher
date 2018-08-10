@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starplanforparents/pages/Setting.dart';
+import 'package:flutter_starplanforparents/pages/ShouChangPage.dart';
 
 class TabMyPage extends StatefulWidget {
   @override
@@ -17,7 +18,11 @@ class _TabMyPageState extends State<TabMyPage> {
           _buildCenter(),
           new Container(
             padding: const EdgeInsets.only(top: 10.0),
-            child: _buildBottom("images/collect.png", "收藏"),
+            child: _buildBottom("images/collect.png", "收藏",onTap: (){
+              Navigator.push(context, new MaterialPageRoute(builder: (context){
+                return new ShouChangPage();
+              },));
+            },),
           ),
           new Divider(height: 0.5),
           _buildBottom("images/comments.png", "评论回复"),
@@ -203,7 +208,7 @@ class _TabMyPageState extends State<TabMyPage> {
   }
 
   // bottom
-  Widget _buildBottom(String url, String title,{onTap}) {
+  Widget _buildBottom(String url, String title,{GestureTapCallback onTap}) {
     return new GestureDetector(child: Container(
       height: 56.0,
       color: Colors.white,

@@ -13,12 +13,29 @@ class _HomeWorkPageState extends State<HomeWorkPage> {
     return new Scaffold(
       body: new Container(
         color: Colors.white,
-        child: new Column(
-          children: <Widget>[
-            _HomeTitle(),
-//            _listClass(),
-          ],
-        ),
+        child: new Column(children: <Widget>[
+          _HomeTitle(),
+
+          /// 该段代码演示使用ConstrainedBox可以给定控件指定的宽度和高度
+          new Row(
+            children: <Widget>[
+              new ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 60.0,maxHeight: 250.0 ),
+                child: ListView(shrinkWrap: true,
+                  children: new List<Widget>.generate(
+                      100, (int i) => new Text('${i}年级')).toList(),
+                ),
+              ),
+              new ConstrainedBox(
+                constraints: new BoxConstraints(maxWidth: 200.0,maxHeight: 250.0),
+                child: ListView(shrinkWrap: true,
+                  children: new List<Widget>.generate(
+                      100, (int i) => new Text('${i}年级')).toList(),
+                ),
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }
@@ -63,8 +80,10 @@ class _HomeWorkPageState extends State<HomeWorkPage> {
 
   // 年级选择项
   Widget _listClass() {
-    return new Expanded(child: new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+    return new Expanded(
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
 //        new ListView.custom(
 //          childrenDelegate: new SliverChildListDelegate(
 //            new List.generate(
@@ -84,7 +103,8 @@ class _HomeWorkPageState extends State<HomeWorkPage> {
 //                )),
 //          ),
 //        ),
-      ],
-    ),);
+        ],
+      ),
+    );
   }
 }

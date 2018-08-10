@@ -6,8 +6,14 @@ import 'pages/homepage.dart';
 import 'pages/splash.dart';
 import 'pages/login.dart';
 import 'pages/tab_book_page.dart';
+import 'pages/guide.dart';
+import 'package:flutter/rendering.dart';
 
-void main() => runApp(new MyApp());
+void main(){
+  //设置debugPaintSizeEnabled为true来更直观的调试布局问题
+//  debugPaintSizeEnabled=true;
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/Splash': (BuildContext context) => new Splash(),
         '/Login': (BuildContext context) => new LoginPage(),
         '/TabBookPage': (BuildContext context) => new TabBookPage(),
+        '/guide': (BuildContext context) => new guidePage(),
       },
       home: new Splash(),
     );

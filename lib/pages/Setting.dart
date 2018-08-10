@@ -11,7 +11,8 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      /// PreferredSize可以自己定义appbar的高度
+      appBar: PreferredSize(child: new AppBar(
         elevation: 0.1,
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -28,7 +29,7 @@ class _SettingPageState extends State<SettingPage> {
           ),
           onTap: () => Navigator.pop(context),
         ),
-      ),
+      ),preferredSize: Size.fromHeight(48.0),),
       body: new Container(
         margin: const EdgeInsets.only(top: 20.0),
         child: new Column(

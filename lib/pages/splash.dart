@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
 }
+
 // WidgetsBindingObserver用于监听生命周期
 class _SplashState extends State<Splash> with WidgetsBindingObserver {
   AppLifecycleState _lastLifecyleState;
-
+  bool _getGuideShared = false;
   Future<Null> _logOut() async {
 //    String dir = (await getApplicationDocumentsDirectory()).path;
     await Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
-         Navigator.of(context).popAndPushNamed("/HomePage");
+        Navigator.of(context).popAndPushNamed("/HomePage");
       },
     ));
   }
@@ -47,7 +47,6 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 //                  return RouteUtil.routetoHome(context);
 //                  _logOut();
                   go2HomePage();
-
                 },
               ),
             ),
@@ -96,13 +95,17 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   _getTokenShared() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token");
-    print('Pressed $token');
-    // 有token跳转到首页没有跳转登录页面
-    if (token != null && token != ""){
-      Navigator.pushReplacementNamed(context , '/HomePage');
-    }else{
-      Navigator.pushReplacementNamed(context , '/Login');
+    _getGuideShared = prefs.getBool("KEY_GUIDE_ACTIVITY");
+    if (_getGuideShared == null || _getGuideShared == false) {
+      Navigator.pushReplacementNamed(context, '/guide');
+    } else {
+      print('Pressed $token');
+      // 有token跳转到首页没有跳转登录页面
+      if (token != null && token != "") {
+        Navigator.pushReplacementNamed(context, '/HomePage');
+      } else {
+        Navigator.pushReplacementNamed(context, '/Login');
+      }
     }
-
   }
 }

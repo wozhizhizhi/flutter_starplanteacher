@@ -237,6 +237,7 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement initState
     super.initState();
     logintum = new getLogin();
+
 //    _getData();
   }
 
