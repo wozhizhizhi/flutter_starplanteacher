@@ -8,6 +8,35 @@ class HomeWorkPage extends StatefulWidget {
 
 class _HomeWorkPageState extends State<HomeWorkPage> {
   int lastClickTime = 0;
+
+  /** 获取屏幕宽度 */
+  static double getScreenWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
+
+  /** 获取屏幕高度 */
+  static double getScreenHeight(BuildContext context) {
+    return  MediaQuery.of(context).size.height;
+  }
+
+  /** 获取系统状态栏高度 */
+  static double getSysStatsHeight(BuildContext context) {
+    return MediaQuery.of(context).padding.top;
+  }
+
+  /** 返回当前时间戳 */
+  static int currentTimeMillis() {
+    return new DateTime.now().millisecondsSinceEpoch;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -16,11 +45,11 @@ class _HomeWorkPageState extends State<HomeWorkPage> {
         child: new Column(children: <Widget>[
           _HomeTitle(),
 
-          /// 该段代码演示使用ConstrainedBox可以给定控件指定的宽度和高度
+          /// 该段代码演示使用ConstrainedBox可以给定控件指定的宽度和高度,
           new Row(
             children: <Widget>[
               new ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 60.0,maxHeight: 250.0 ),
+                constraints: const BoxConstraints(maxWidth: 60.0,maxHeight:250.0),
                 child: ListView(shrinkWrap: true,
                   children: new List<Widget>.generate(
                       100, (int i) => new Text('${i}年级')).toList(),
@@ -33,6 +62,7 @@ class _HomeWorkPageState extends State<HomeWorkPage> {
                       100, (int i) => new Text('${i}年级')).toList(),
                 ),
               ),
+
             ],
           ),
         ]),

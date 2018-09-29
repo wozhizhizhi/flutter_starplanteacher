@@ -110,7 +110,7 @@ class _TabReadHubPageState extends State<TabReadHubPage>
             ),
             new SliverPersistentHeader(
                 pinned: true,
-                delegate: new _SliverAppBarDelegate(new TabBar(
+                delegate: new _SliverAppBarDelegate(new TabBar(isScrollable: false,
                   tabs: myTabs,
                   labelColor: const Color(0xff22b2e1),
                   unselectedLabelColor: Colors.grey,

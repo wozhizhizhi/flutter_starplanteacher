@@ -76,8 +76,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Image getTabImage(path) {
     return new Image.asset(
       path,
-      width: 25.0,
-      height: 25.0,
+      width: 50.0,
+      height: 48.0,
     );
   }
 

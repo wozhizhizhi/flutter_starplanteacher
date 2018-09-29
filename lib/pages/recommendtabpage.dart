@@ -99,6 +99,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
   @override
   Widget build(BuildContext context) {
     var content;
+    double itemWidth = MediaQuery.of(context).size.width;
     if (bookListvo.isEmpty) {
       content = new CommonLoading();
     } else {
@@ -133,11 +134,11 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
                 },
                 childCount: model.data.length,
               ),
-              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0,
-                  childAspectRatio: 0.58),
+              gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: itemWidth/3.0,
+                  mainAxisSpacing: 0.0,
+                  crossAxisSpacing: 0.0,
+                  childAspectRatio: itemWidth/120.0),
             )
           ],
         ),

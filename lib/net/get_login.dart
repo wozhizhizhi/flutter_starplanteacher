@@ -8,6 +8,7 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter_starplanforparents/net/fecth.dart';
 import 'package:flutter_starplanforparents/strings/string.dart';
+import 'package:flutter/foundation.dart'; //一个用于识别操作系统的工具库，其内的defaultTargetPlatform值可帮助我们识别操作系统
 
 class getLogin {
   Future<BaseModel<LoginVo>> getLoginData(
@@ -42,7 +43,7 @@ class getLogin {
         "uniqueId": uniqueId,
         "phoneMark": phoneMark,
         "systemMark": systemMark,
-        "platForm": 1,
+        "platForm": defaultTargetPlatform == TargetPlatform.android?1:2,
         "version": version,
         "token": token,
         "time": new DateTime.now().millisecondsSinceEpoch,

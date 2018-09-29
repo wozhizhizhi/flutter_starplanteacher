@@ -146,7 +146,8 @@ class _LoginPageState extends State<LoginPage> {
                   new Flexible(
                     child: new Container(
                       child: new TextField(
-                        keyboardType: TextInputType.numberWithOptions(signed: true,decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(
+                            signed: true, decimal: true),
                         controller: _passWordEditingController,
                         decoration: new InputDecoration.collapsed(
                           hintText: "请输入密码",
@@ -167,18 +168,22 @@ class _LoginPageState extends State<LoginPage> {
               ),
               color: Colors.white),
         ),
-        new GestureDetector(child: new Container(
-          child: new Text(
-            "忘记密码",
-            style: new TextStyle(color: Colors.white),
+        new GestureDetector(
+          child: new Container(
+            child: new Text(
+              "忘记密码",
+              style: new TextStyle(color: Colors.white),
+            ),
+            alignment: Alignment.bottomRight,
+            padding: const EdgeInsets.only(right: 35.0, top: 10.0),
           ),
-          alignment: Alignment.bottomRight,
-          padding: const EdgeInsets.only(right: 35.0, top: 10.0),
-        ),onTap: (){
-          return Navigator.push(context, new MaterialPageRoute(builder: (context){
-               return new RegisteredPage();
-          }));
-        },),
+          onTap: () {
+            return Navigator.push(context,
+                new MaterialPageRoute(builder: (context) {
+              return new RegisteredPage();
+            }));
+          },
+        ),
         new FittedBox(
           child: new Container(
             width: 250.0,
@@ -264,6 +269,13 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacementNamed(context, "/HomePage");
       }
     }
+    new Builder(builder: (context) {
+      Scaffold.of(context).showSnackBar(
+        new SnackBar(
+          content: new Text(model.statusMsg),
+        ),
+      );
+    });
 
     setState(() {
       model = model;
