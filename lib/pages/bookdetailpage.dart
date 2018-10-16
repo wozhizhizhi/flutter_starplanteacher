@@ -56,6 +56,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
               slivers: <Widget>[
                 new SliverAppBar(
                   centerTitle: true,
+                  elevation: 0.0,
                   title: new Text(
                     "鸭子学车记鸭子学车记凯迪克大奖得主代表作",
                     style: new TextStyle(fontSize: 16.0),

@@ -33,9 +33,7 @@ class getLogin {
       print(systemMark);
       print(account);
       print(phoneMark);
-//      806933fb23210ac6bbf1892097a100c8
-      print(md5.convert(utf8.encode(realPassword+Strings.MD5_T_MARK)));
-      response = await dio.post(url, data: {
+      Map parame ={
         "account": account,
         "password": md5.convert(utf8.encode(realPassword+Strings.MD5_T_MARK)),
         "loginType": loginType,
@@ -47,9 +45,13 @@ class getLogin {
         "version": version,
         "token": token,
         "time": new DateTime.now().millisecondsSinceEpoch,
-      });
+      };
+//      806933fb23210ac6bbf1892097a100c8
+      print(md5.convert(utf8.encode(realPassword+Strings.MD5_T_MARK)));
+      print("请求参数: "+ parame.toString());
+      response = await dio.post(url, data: parame);
       print(url);
-      print("response-+++ $response");
+      print("response-+++ ${response.data}");
       code = response.statusCode;
       if (code == HttpStatus.OK) {
         print(response.data['statusMsg']);

@@ -7,61 +7,47 @@ class RegisteredPage extends StatefulWidget {
 }
 
 class _RegisteredPageState extends State<RegisteredPage> {
-  int countTime = 10;
-  String count = "获取验证码";
-  Timer timer;
-
-  startTime(){
-    timer = new Timer(const Duration(milliseconds: 1000), (){
-      if (countTime-- == 0){
-        timer.cancel();
-      }else{
-        countTime--;
-      }
-
-      setState(() {
-        if (countTime-- == 0){
-          timer.cancel();
-          count = "获取验证码";
-        }
-        else{
-          count = "${countTime--}s";
-        }
-      });
-
-    });
-//    new Future((){
-////      timer = new Timer.periodic(const Duration(milliseconds: 1000), (Void){
-////        --countTime;
-////        setState(() {
-////          if (countTime == 0) {
-////            timer.cancel();
-////            return count = "获取验证码";
-////          }
-////          else{
-////            return count = "${--countTime}s";
-////          }
-////        });
-////      });
-//    timer = new Timer(const Duration(milliseconds: 1000), (){
-//      countTime = countTime -1;
-//      if (countTime == 0){
-//        timer.cancel();
-//        return;
-//      }
-//      setState(() {
-//        if (countTime == 0){
-//
-//          return count = "获取验证码";
-//        }
-//        else{
-//          return count = "${--countTime}s";
-//        }
-//      });
-//
-//    });
-//    });
+  int _seconds = 0;
+  String _verifyStr  = "获取验证码";
+  /// 定时器Timer
+  Timer _timer;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    /// 页面销毁的时候,清除timer
+    _cancleTimer();
+
+  }
+
+  /// 倒计时
+  _startTimer() {
+    _seconds = 10;
+
+    _timer = Timer.periodic(new Duration(seconds: 1), (timer){
+      if(_seconds == 0){
+        _cancleTimer();
+        return;
+      }
+      _seconds--;
+      _verifyStr = "${_seconds}s";
+      if (_seconds == 0){
+        _verifyStr = "重新发送";
+      }
+      setState(() {});
+    });
+  }
+
+  _cancleTimer(){
+    _timer?.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -201,15 +187,20 @@ class _RegisteredPageState extends State<RegisteredPage> {
         new Container(
           padding: const EdgeInsets.only(top: 15.0, left: 15.0),
           child: new RaisedButton(
-            onPressed: startTime(),
-            child: new Text(count),
+            /// 触发定时任务
+            onPressed: (_seconds == 0)?(){
+              _startTimer();
+            }:null,
+            child: new Text(_verifyStr),
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.all(new Radius.circular(15.0)),
             ),
-            disabledTextColor: Colors.blue,
+            textColor: Colors.blue,
+            color: Colors.yellowAccent,
             disabledColor: Colors.yellowAccent,
+            disabledTextColor: Colors.blue,
           ),
-        )
+        ),
       ],
     );
   }

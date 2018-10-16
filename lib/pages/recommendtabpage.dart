@@ -138,7 +138,7 @@ class _RecommendTabPageState extends State<RecommendTabPage> {
                   maxCrossAxisExtent: itemWidth/3.0,
                   mainAxisSpacing: 0.0,
                   crossAxisSpacing: 0.0,
-                  childAspectRatio: itemWidth/120.0),
+                  childAspectRatio: 0.6),
             )
           ],
         ),
