@@ -52,7 +52,7 @@ class NetUtil{
         "time": new DateTime.now().millisecondsSinceEpoch,
       });
 
-      print("response-+++ $response");
+      print("response-+++ ${response.toString()}");
       code = response.statusCode;
       if (code == HttpStatus.OK) {
         print(response.data['statusMsg']);

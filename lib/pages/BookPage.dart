@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_starplanforparents/r.dart';
 class BookPage extends StatefulWidget {
   @override
   _BookPageState createState() => _BookPageState();
@@ -128,7 +128,7 @@ class _BookPageState extends State<BookPage>
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         new Image.asset(
-                          "images/icon_reply_s.png",
+                          R.imagesIconReplySPng,
                           width: 15.0,
                           height: 15.0,
                         ),
